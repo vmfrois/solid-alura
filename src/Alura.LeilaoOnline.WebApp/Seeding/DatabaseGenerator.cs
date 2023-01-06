@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Alura.LeilaoOnline.WebApp.Models;
 using Alura.LeilaoOnline.WebApp.Dados;
+using Alura.LeilaoOnline.WebApp.Dados.EfCore;
 
 namespace Alura.LeilaoOnline.WebApp.Seeding
 {
