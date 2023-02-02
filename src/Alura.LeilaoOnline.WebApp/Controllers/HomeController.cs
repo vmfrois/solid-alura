@@ -6,7 +6,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        IProdutoService _service;
+        readonly IProdutoService _service;
 
         public HomeController(IProdutoService service)
         {
@@ -38,7 +38,6 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         public IActionResult Busca(string termo)
         {
             ViewData["termo"] = termo;
-            var termoNormalized = termo.ToUpper();
             var leiloes = _service.SearchAuctionsOnTradingFloor(termo);
             return View(leiloes);
         }

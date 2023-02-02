@@ -10,7 +10,7 @@ namespace Alura.LeilaoOnline.WebApp.Services
         Leilao GetAuction(int id);
         void InsertAuction(Leilao auction);
         void UpdateAuction(Leilao auction);
-        void DeleteAuction(int id);
+        void DeleteAuction(Leilao auction);
         void StartAuctionSessionWithId(int id);
         void FinishAuctionSessionWithId(int id);
     }

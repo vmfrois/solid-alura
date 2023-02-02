@@ -7,8 +7,8 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
 {
     public class DefaultAdminService : IAdminService
     {
-        ILeilaoDao _dao;
-        ICategoriaDao _categoryDao;
+        readonly ILeilaoDao _dao;
+        readonly ICategoriaDao _categoryDao;
 
         public DefaultAdminService(ILeilaoDao dao, ICategoriaDao categoryDao)
         {
@@ -18,12 +18,12 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
         
         public IEnumerable<Leilao> GetAllAuctions()
         {
-            return _dao.GetAllAuction();
+            return _dao.GetAll();
         }
 
         public IEnumerable<Categoria> GetAllCategory()
         {
-            return _categoryDao.GetAllCategory();
+            return _categoryDao.GetAll();
         }
 
         public Leilao GetAuction(int id)
@@ -41,9 +41,9 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
             _dao.Update(auction);
         }
 
-        public void DeleteAuction(int id)
+        public void DeleteAuction(Leilao leilao)
         {
-            _dao.Delete(id);
+            _dao.Delete(leilao);
         }
 
         public void StartAuctionSessionWithId(int id)

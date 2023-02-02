@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Alura.LeilaoOnline.WebApp.Models;
-using Alura.LeilaoOnline.WebApp.Dados;
 using Alura.LeilaoOnline.WebApp.Services;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
@@ -9,7 +8,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     [Route("/api/leiloes")]
     public class LeilaoApiController : ControllerBase
     {
-        IAdminService _service;
+        readonly IAdminService _service;
 
         public LeilaoApiController(IAdminService service)
         {
@@ -56,7 +55,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
             {
                 return NotFound();
             }
-            _service.DeleteAuction(leilao.Id);
+            _service.DeleteAuction(leilao);
             return NoContent();
         }
 

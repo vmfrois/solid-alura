@@ -13,7 +13,7 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
             _context = new AppDbContext();
         }
 
-        public IEnumerable<Leilao> GetAllAuction()
+        public IEnumerable<Leilao> GetAll()
         {
             var leiloes = _context.Leiloes
                 .Include(l => l.Categoria);
@@ -38,9 +38,8 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
             _context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(Leilao leilao)
         {
-            var leilao = _context.Leiloes.Find(id);
             _context.Leiloes.Remove(leilao);
             _context.SaveChanges();
         }
