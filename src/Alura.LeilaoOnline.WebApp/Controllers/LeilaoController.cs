@@ -1,17 +1,13 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Alura.LeilaoOnline.WebApp.Dados;
 using Alura.LeilaoOnline.WebApp.Models;
-using System;
 using Alura.LeilaoOnline.WebApp.Services;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
     public class LeilaoController : Controller
     {
-
-        IAdminService _service;
+        readonly IAdminService _service;
         public LeilaoController(IAdminService service)
         {
             _service = service;
@@ -72,10 +68,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             var leilao = _service.GetAuction(id);
             if (leilao == null) return NotFound();
-            if (leilao.Situacao != SituacaoLeilao.Rascunho) return StatusCode(405);
-            leilao.Situacao = SituacaoLeilao.Pregao;
-            leilao.Inicio = DateTime.Now;
-            _service.UpdateAuction(leilao);
+            _service.StartAuctionSessionWithId(id);
             return RedirectToAction("Index");
         }
 
@@ -84,10 +77,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             var leilao = _service.GetAuction(id);
             if (leilao == null) return NotFound();
-            if (leilao.Situacao != SituacaoLeilao.Pregao) return StatusCode(405);
-            leilao.Situacao = SituacaoLeilao.Finalizado;
-            leilao.Termino = DateTime.Now;
-            _service.UpdateAuction(leilao);
+            _service.FinishAuctionSessionWithId(id);
             return RedirectToAction("Index");
         }
 
@@ -96,8 +86,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         {
             var leilao = _service.GetAuction(id);
             if (leilao == null) return NotFound();
-            if (leilao.Situacao == SituacaoLeilao.Pregao) return StatusCode(405);
-            _service.DeleteAuction(leilao.Id);
+            _service.DeleteAuction(leilao);
             return NoContent();
         }
 

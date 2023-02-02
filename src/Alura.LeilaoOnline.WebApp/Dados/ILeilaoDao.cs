@@ -3,12 +3,7 @@ using System.Collections.Generic;
 
 namespace Alura.LeilaoOnline.WebApp.Dados
 {
-    public interface ILeilaoDao
+    public interface ILeilaoDao : ICommand<Leilao>, IQuery<Leilao>
     {
-        IEnumerable<Leilao> GetAllAuction();
-        Leilao GetById(int id);
-        void Insert(Leilao leilao);
-        void Update(Leilao leilao);
-        void Delete(int id);
     }
 }

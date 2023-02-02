@@ -10,7 +10,7 @@ namespace Alura.LeilaoOnline.WebApp.Seeding
     {
         public static void Seed()
         {
-            using (var ctx = new AppDbContext())
+            using (AppDbContext ctx = new AppDbContext())
             {
                 if (ctx.Database.EnsureCreated())
                 {
